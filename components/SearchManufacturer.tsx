@@ -4,9 +4,8 @@ import { Combobox, Transition } from '@headlessui/react'
 import { SearchManufacturerProps } from '@/types'
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
-
 import { manufacturers } from '@/constants'
-const SearchManufacturer = ({ manufacturer, setManufacturer} : SearchManufacturerProps) => {
+const SearchManufacturer = ({ selected, setSelected } : SearchManufacturerProps ) => {
   const [query, setQuery] = useState('')
 
   const filteredManufacturers = query === "" ? manufacturers :
@@ -15,7 +14,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer} : SearchManufacture
 
   return (
     <div className='search-manufacturer'>
-        <Combobox value={manufacturer} onChange={setManufacturer}>
+        <Combobox value={selected} onChange={setSelected}>
             <div className='relative w-full'>
                 <Combobox.Button className='absolute top-[14px]'>
                     <Image src='/car-logo.svg' alt='car-logo' 
@@ -25,7 +24,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer} : SearchManufacture
                 </Combobox.Button>
                 <Combobox.Input 
                   className='search-manufacturer__input'
-                  placeholder='Volkswagen'
+                  placeholder='Toyota'
                   displayValue= {(manufacturer: string) => manufacturer }
                   onChange={(e) => setQuery(e.target.value)} 
                 />

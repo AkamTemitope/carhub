@@ -10,9 +10,14 @@ export interface CustomButtonProps {
     handleClick?: MouseEventHandler<HTMLButtonElement>
 }
 
+export interface searchBarProps {
+    setModel: React.Dispatch<React.SetStateAction<string>>
+    setManufacturer: React.Dispatch<React.SetStateAction<string>>
+}
+
 export interface SearchManufacturerProps {
-    manufacturer: string;
-    setManufacturer: (manufacturer: string) => void
+    selected: string;
+    setSelected: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface OptionProps {
@@ -21,8 +26,8 @@ export interface OptionProps {
 }
 
 export interface CustomFilterProps {
-    title: string;
     options: OptionProps[];
+    setFilter: React.Dispatch<React.SetStateAction<string>>
 
 }
 
@@ -41,6 +46,8 @@ export interface CarProps {
     year: number;
 }
 
+export type CarState = CarProps[] & { message?: string };
+
 export interface FilterProps {
     manufacturer: string;
     model: string;
@@ -50,7 +57,8 @@ export interface FilterProps {
     pageNumber? : number;
 }
 
-export interface ShoeMoreProps {
+export interface ShowMoreProps {
     pageNumber: number;
     isNext: boolean;
+    setLimit: React.Dispatch<React.SetStateAction<number>>;
 }
