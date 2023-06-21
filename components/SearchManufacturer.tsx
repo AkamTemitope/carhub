@@ -10,7 +10,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer} : SearchManufacture
   const [query, setQuery] = useState('')
 
   const filteredManufacturers = query === "" ? manufacturers :
-   manufacturers.filter((item) => ( 
+    manufacturers.filter((item) => ( 
     item.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))))
 
   return (
@@ -44,7 +44,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer} : SearchManufacture
                         className={({ active }) => `relative search-manufacturer__option ${active ? 'bg-primary-blue text-white' : 'text-gray-900'}`}
                       >
                         {({ selected, active }) => (
-                         <>
+                          <>
                             <span
                               className={`block truncate ${
                                 selected ? 'font-medium' : 'font-normal'

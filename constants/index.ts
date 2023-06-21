@@ -56,23 +56,13 @@ export const manufacturers = [
   ];
   
   export const fuels = [
-    {
-      title: "Fuel",
-      value: "",
-    },
-    {
-      title: "Gas",
-      value: "Gas",
-    },
-    {
-      title: "Electricity",
-      value: "Electricity",
-    },
+    { title: "Fuel", value: "" },
+    { title: "Gas", value: "Gas", }, 
+    { title: "Electricity", value: "Electricity", },
   ];
   
   export const footerLinks = [
-    {
-      title: "About",
+    { title: "About",
       links: [
         { title: "How it works", url: "/" },
         { title: "Featured", url: "/" },
