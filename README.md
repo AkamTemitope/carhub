@@ -1,6 +1,6 @@
 # CarHub
 
-[CarHub](https://carhub-sage-delta.vercel.app/) is an immersive online platform dedicated to all things cars. It serves as a comprehensive hub for car enthusiasts, buyers, and sellers alike.
+[CarHub](https://dub.sh/carhub) is an immersive online platform dedicated to all things cars. It serves as a comprehensive hub for car enthusiasts, buyers, and sellers alike.
 
 
 
