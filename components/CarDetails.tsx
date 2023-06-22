@@ -12,7 +12,7 @@ interface CarDetailsProps {
     car: CarProps;
 }
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps ) => {
-    const [imageUrls, setImageUrls] = useState([])
+    const [imageUrls, setImageUrls] = useState<string[]>([])
 
     useEffect(() => {
         const getUrl = async () => {
