@@ -18,12 +18,19 @@ export async function fetchCars(filters: FilterProps) {
 export const  getImageUrls = async (query: string, limit : number = 1) => {
     const client = createClient(`${process.env.NEXT_PUBLIC_PEXELS_API_KEY}`);
 
-    const response = await client.photos.search({ query, per_page: limit });
-    const photos = response?.photos;
-    const photoUrls = photos.map((photo) => photo.src.landscape)
-    console.log("utils response", photoUrls)
+    try {
+        const response = await client.photos.search({ query, per_page: limit });
+        let photoUrls = [""]
+        if ('photos' in response) {
+            const photos = response?.photos;
+            photoUrls = photos.map((photo) => photo.src.landscape)
+        }        
+        return photoUrls;
+    } catch (error) {
+        console.log(error)
+        return [""]
+    }
 
-    return photoUrls;
 }
 
 // imagin.studio api not working, so i used the pexels api instead. 
