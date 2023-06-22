@@ -47,7 +47,7 @@ const CarCard =  ({ car }: CarCardProps ) => {
             </span>
         </p>
         <div className='relative w-full md:h-40 h-60 my-3 object-contain'>
-            {loading || !imageUrl ? (
+            {loading ? (
                 <Image src='/loader.svg' alt ='car model' fill priority 
                     className='object contain'
                 />
