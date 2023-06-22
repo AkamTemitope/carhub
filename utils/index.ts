@@ -20,7 +20,7 @@ export const  getImageUrls = async (query: string, limit : number = 1) => {
 
     const response = await client.photos.search({ query, per_page: limit });
     const photos = response?.photos;
-    const photoUrls = photos.map((photo) => photo.src.original)
+    const photoUrls = photos.map((photo) => photo.src.landscape)
     console.log("utils response", photoUrls)
 
     return photoUrls;
