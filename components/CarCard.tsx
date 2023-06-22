@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CarProps } from '@/types'
-import { calculateCarRent, generateCarImageUrl } from '@/utils';
+import { calculateCarRent, generateCarImageUrl, getImageUrls } from '@/utils';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 import CarDetails from './CarDetails';
@@ -11,11 +11,27 @@ interface CarCardProps {
     car: CarProps;
 }
 
-const CarCard = ({ car }: CarCardProps ) => {
+const CarCard =  ({ car }: CarCardProps ) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [imageUrl, setImageUrl] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const { city_mpg, drive, fuel_type, make, model, transmission, year } = car
     const carRent = calculateCarRent(city_mpg, year)
+
+    useEffect(() => {
+        setLoading(true)
+        const getUrl = async () => {
+            const query = `${make}' '${model}`
+            const url = await getImageUrls(query)
+            setImageUrl(url[0])     
+            setLoading(false)       
+        }
+        getUrl()
+
+    }, [make])
+
+    
     return (
     <div className='car-card group'>
         <div className='car-card__content'>
@@ -30,10 +46,17 @@ const CarCard = ({ car }: CarCardProps ) => {
                 /day
             </span>
         </p>
-        <div className='relative w-full h-40 my-3 object-contain'>
-            <Image src={generateCarImageUrl(car)} alt ='car model' fill priority 
-                className='object contain'
-            />
+        <div className='relative w-full h-60 my-3 object-contain'>
+            {loading || !imageUrl ? (
+                <Image src='/loader.svg' alt ='car model' fill priority 
+                    className='object contain'
+                />
+            ) : 
+            (
+                <Image src={imageUrl} alt ='car model' fill priority 
+                    className='object contain'
+                />
+            )}
 
         </div>
         <div className='relative flex w-full mt-2'>
@@ -44,7 +67,7 @@ const CarCard = ({ car }: CarCardProps ) => {
                 </div>
                 <div className='flex flex-col justify-center item-center gap-2'>
                     <Image src='/tire.svg' width={20} height={20} alt='tire' />
-                    <p className='text-[14px]'>{drive.toLocaleUpperCase()}</p>
+                    <p className='text-[14px]'>{drive.toUpperCase()}</p>
                 </div>
                 <div className='flex flex-col justify-center item-center gap-2'>
                     <Image src='/gas.svg' width={20} height={20} alt='gas' />

@@ -1,4 +1,5 @@
 import { CarProps, FilterProps } from "@/types";
+import { createClient } from 'pexels';
 
 export async function fetchCars(filters: FilterProps) {
     const { manufacturer, model, year, fuel, limit } = filters;
@@ -14,6 +15,19 @@ export async function fetchCars(filters: FilterProps) {
     return result;   
 }
 
+export const  getImageUrls = async (query: string, limit : number = 1) => {
+    const client = createClient(`${process.env.NEXT_PUBLIC_PEXELS_API_KEY}`);
+
+    const response = await client.photos.search({ query, per_page: limit });
+    const photos = response?.photos;
+    const photoUrls = photos.map((photo) => photo.src.original)
+    console.log("utils response", photoUrls)
+
+    return photoUrls;
+}
+
+// imagin.studio api not working, so i used the pexels api instead. 
+// Although it isn't the best choice for getting car model images, al least the images are gotten from an api endpoint
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
     const url = new URL("https://cdn.imagin.studio/getimage");
     const { make, model, year } = car;
