@@ -1,17 +1,26 @@
 'use client'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { CarProps } from "@/types";
+import { Fragment, useEffect, useState } from 'react'
+import { CarDetailsProps } from "@/types";
 import Image from 'next/image';
-import { generateCarImageUrl } from '@/utils';
+import { getImageUrls } from '@/utils';
 
-interface CarDetailsProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    car: CarProps;
-}
+
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps ) => {
+    const [imageUrls, setImageUrls] = useState<string[]>([])
+
+    useEffect(() => {
+        const getUrl = async () => {
+            const query = `${car.make}' '${car.model}`
+            const urls = await getImageUrls(query, 4)
+            console.log("car details",query)
+            setImageUrls(urls)        
+        }
+        getUrl()
+
+    }, [])
+
     return (
         <>
           <Transition appear show={isOpen} as={Fragment}>
@@ -49,23 +58,23 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps ) => {
                       </button>
                       <div className="flex flex-col gap-3">
                         <div className='relative w-full h-60 bg-pattern bg-cover rounded-lg'>
-                          <Image src={generateCarImageUrl(car)} alt ='car model' fill priority 
+                          <Image src={imageUrls[0]} alt ='car model' fill priority 
                               className='object contain'
                           />
                         </div>
                         <div className='flex gap-3'>
                           <div className='flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg'>
-                            <Image src={generateCarImageUrl(car, '29')} alt ='car model' fill priority 
+                            <Image src={imageUrls[1]} alt ='car model' fill priority 
                                 className='object contain'
                             />
                           </div>
                           <div className='flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg'>
-                            <Image src={generateCarImageUrl(car, '33')} alt ='car model' fill priority 
+                            <Image src={imageUrls[2]} alt ='car model' fill priority 
                                 className='object contain'
                             />
                           </div>
                           <div className='flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg'>
-                            <Image src={generateCarImageUrl(car, '13')} alt ='car model' fill priority 
+                            <Image src={imageUrls[3]} alt ='car model' fill priority 
                                 className='object contain'
                             />
                           </div>

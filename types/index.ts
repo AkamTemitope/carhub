@@ -41,6 +41,12 @@ export interface CarProps {
     year: number;
 }
 
+export interface CarDetailsProps {
+    isOpen: boolean;
+    closeModal: () => void;
+    car: CarProps;
+}
+
 export interface FilterProps {
     manufacturer: string;
     model: string;
