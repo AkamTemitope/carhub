@@ -19,9 +19,9 @@
 
 ### Environmental Variables
 
-- NEXT_PUBLIC_RAPID_API_KEY: The API key necessary for interacting with the Cars by API-Ninjas service.
-- NEXT_PUBLIC_IMAGIN_API_KEY: The API key required for accessing the Imagin.studio API (now replaced with Pexels API).
-- NEXT_PUBLIC_PEXELS_API_KEY: The API key for utilizing the Pexels API, which provides vehicle model images(Doesn't always provide the exact vehicle model, but at least images are loaded).
+- `NEXT_PUBLIC_RAPID_API_KEY`: The API key necessary for interacting with the Cars by API-Ninjas service.
+- `NEXT_PUBLIC_IMAGIN_API_KEY`: The API key required for accessing the Imagin.studio API (now replaced with Pexels API).
+- `NEXT_PUBLIC_PEXELS_API_KEY`: The API key for utilizing the Pexels API, which provides vehicle model images(Doesn't always provide the exact vehicle model, but at least images are loaded).
 
 
 <img src='https://i.postimg.cc/qMCpg02c/carhub1.png' alt='carhub1'/>
