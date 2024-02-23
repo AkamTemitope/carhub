@@ -13,7 +13,11 @@
 
 - Cars by API-Ninjas: This API provides detailed data on vehicle models
 - Pexels OR Pixabay: Free image resources.
+<<<<<<< HEAD
 - imagin.studio API: Good quality car images, 60 days trial(later not free)
+=======
+- imagin.studio API: Good quality car images, 60 days trial(not free)
+>>>>>>> 3cde44e361e9f4f793b6fa7483187ae62c2e25ca
 
 ### Environmental Variables
 
