@@ -1,22 +1,24 @@
 "use client";
 
 import { Combobox, Transition } from "@headlessui/react";
-import { SearchManufacturerProps } from "@/types";
+import { SearchModelProps } from "@/types";
 import { Fragment, useState } from "react";
 import Image from "next/image";
 
-import { make } from "@/constants";
+import { models } from "@/constants";
 
-const SearchManufacturer = ({
-  manufacturer,
-  setManufacturer
-}: SearchManufacturerProps) => {
+const SearchModel = ({ manufacturer, model, setModel }: SearchModelProps) => {
   const [query, setQuery] = useState("");
 
-  const filteredManufacturers =
+  if (!manufacturer) {
+    return null;
+  }
+  const makeModels = models[manufacturer];
+
+  const filteredModels =
     query === ""
-      ? make
-      : make.filter((item) =>
+      ? makeModels
+      : makeModels.filter((item) =>
           item
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -25,12 +27,12 @@ const SearchManufacturer = ({
 
   return (
     <div className="search-manufacturer">
-      <Combobox value={manufacturer} onChange={setManufacturer}>
+      <Combobox value={model} onChange={setModel}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
-              src="/car-logo.svg"
-              alt="car-logo"
+              src="/model-icon.png"
+              alt="car-model"
               className="ml-4"
               width={20}
               height={20}
@@ -45,9 +47,9 @@ const SearchManufacturer = ({
             />
           </Combobox.Button>
           <Combobox.Input
-            className="search-manufacturer__input"
-            placeholder="Make(Toyota)"
-            displayValue={(manufacturer: string) => manufacturer}
+            className="searchbar__input"
+            placeholder="Model(corolla)"
+            displayValue={(model: string) => model}
             onChange={(e) => setQuery(e.target.value)}
           />
           <Transition
@@ -58,7 +60,7 @@ const SearchManufacturer = ({
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="search-manufacturer__options">
-              {filteredManufacturers.map((item) => (
+              {filteredModels.map((item) => (
                 <Combobox.Option
                   key={item}
                   value={item}
@@ -96,4 +98,4 @@ const SearchManufacturer = ({
   );
 };
 
-export default SearchManufacturer;
+export default SearchModel;
